@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories - Walmart Mockup</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div id="logo">Walmart</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="deals.html">Deals</a></li>
+                <li><a href="categories.html">Categories</a></li>
+                <li><a href="services.html">Services</a></li>
+            </ul>
+        </nav>
+        <div id="search-bar">
+            <input type="text" placeholder="Search categories">
+            <button>Search</button>
+        </div>
+        <div id="cart">
+            <a href="cart.html">Cart (0)</a>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main>
+        <!-- Categories Section -->
+        <section id="categories">
+            <h2>Shop by Categories</h2>
+            <div class="category">
+                <img src="category1.jpg" alt="Category 1">
+                <h3>Electronics</h3>
+                <p>Explore the latest gadgets and technology.</p>
+                <button onclick="addToCart('Electronics', 19.99)">Add to Cart</button>
+            </div>
+            <div class="category">
+                <img src="category2.jpg" alt="Category 2">
+                <h3>Clothing</h3>
+                <p>Stay stylish with our fashion collection.</p>
+                <button onclick="addToCart('Clothing', 29.99)">Add to Cart</button>
+            </div>
+            <!-- Repeat similar category blocks here -->
+        </section>
+    </main>
+
+    <!-- JavaScript to handle cart functionality -->
+    <script>
+        let cartItems = [];
+
+        function addToCart(itemName, itemPrice) {
+            cartItems.push({ name: itemName, price: itemPrice });
+            updateCartLink();
+        }
+
+        function updateCartLink() {
+            const cartLink = document.getElementById('cart');
+            cartLink.innerHTML = `<a href="cart.html">Cart (${cartItems.length})</a>`;
+        }
+    </script>
+
+    <!-- Footer Section -->
+    <footer>
+        <div id="footer-content">
+            <div id="contact-info">
+                <h3>Contact Us</h3>
+                <p>123 Main Street, City</p>
+                <p>Email: info@walmart.com</p>
+                <p>Phone: 123-456-7890</p>
+            </div>
+            <div id="social-media">
+                <h3>Follow Us</h3>
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

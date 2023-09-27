@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional CSS styles for the receipt-like design */
+        #cart-contents {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 0px 0px 5px #888;
+        }
+
+        #cart-contents h2 {
+            font-size: 20px;
+        }
+
+        #cart-contents ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #cart-contents li {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        #cart-contents p {
+            font-weight: bold;
+        }
+
+        #cart-total {
+            color: #0073e6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <!-- ... (header content) ... -->
+    </header>
+
+    <!-- Main Content Section -->
+    <main>
+        <!-- Cart Contents -->
+        <section id="cart-contents">
+            <h2>Your Shopping Cart</h2>
+            <ul>
+                <!-- Sample cart items (you can replace this with actual data) -->
+                <li>Product 1 - $19.99</li>
+                <li>Product 2 - $29.99</li>
+            </ul>
+            <p>Total: $<span id="cart-total">49.98</span></p>
+            <a href="checkout.html">Checkout</a> <!-- Link to the checkout page -->
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <!-- ... (footer content) ... -->
+    </footer>
+</body>
+</html>
