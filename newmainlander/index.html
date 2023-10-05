@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Health Benefits Now - #1 Site To Get Free Healthplans</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="shortcut icon" type="image/x-icon" href="assets/icon.png">
+<link rel="stylesheet" type="text/css" href="assets/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="assets/script.js"></script>
+</head>
+
+<body>
+<div class="header">
+  <div class="container">
+    <div class="logo-col"> <img src="assets/logo.svg" class="logo"> </div>
+    <div class="hdr-rgt">
+      <p class="hide-mob">Need a free healthplan? <strong>Call toll free:</strong><span> <a href="tel:18773880266" style="color:#0071bc;font-weight: bold;"><img src="assets/call-ic.png"> (877) 388-0266</a> </span></p>
+      <p class="forMob"><span> <a href="tel:18773880266" style="color:#0071bc;font-weight: bold;"><img src="assets/call-ic.png"> (877) 388-0266</a> </span></p>
+    </div>
+  </div>
+</div>
+<div class="top-banner">
+  <div class="container">
+    <h1 class="banr-heading"> Check Eligibility For $0 Health Insurance Plan + Premium Tax Credit! </h1>
+    <p class="sub-hdng">Tell Us A Little About You</p>
+  </div>
+</div>
+  <div class="quiz-sec">
+    <div class="container">
+      <div class="quiz-inr-box">
+        <div id="progress-bar">
+            <div id="progress"></div>
+        </div>
+        <div class="form-slide active">
+            <h2>What is your current monthly income?</h2>
+            <button class="option-button" onclick="selectOption(this), nextSlide(2)">Less than $4,000</button>
+            <button class="option-button" onclick="selectOption(this), nextSlide(2)">More than $4,000</button>
+            <p class="call">Or Call: <span>(855) 608-0648</span></p>
+        </div>
+        <div class="form-slide">
+            <h2>Are you currently on Medicaid?</h2>
+            <button class="option-button" onclick="selectOption(this), nextSlide(3)">No</button>
+            <button class="option-button" onclick="selectOption(this), nextSlide(3)">Yes</button>
+            <p class="call">Or Call: <span>(855) 608-0648</span></p>
+            <button class="previous-button" onclick="prevSlide(2)">&#8592; Previous</button>
+        </div>
+        <div class="form-slide">
+            <h2>It looks like you may qualify, congrats!</h2>
+            <div class="input-group">
+                <input type="text" placeholder="First Name" required>
+                <input type="text" placeholder="Last Name" required>
+            </div>
+            <input type="tel" placeholder="Phone" required>
+            <input type="email" placeholder="Email" required>
+            <div class="gender-options">
+                <label class="gender-option">
+                    <input type="radio" name="gender" value="Male">
+                    <span>Male</span>
+                </label>
+                <label class="gender-option">
+                    <input type="radio" name="gender" value="Female">
+                    <span>Female</span>
+                </label>
+            </div>
+            <button class="claim-button" onclick="completeForm()">Claim Your Benefits</button>
+            <p class="call">Or Call: <span>(855) 608-0648</span></p>
+            <button class="previous-button" onclick="prevSlide(3)">&#8592; Previous</button>
+            <p class="tcpa-disclosure">By clicking the above button and submitting this form, I agree that I am 18+ years old and I provide my signature expressly consenting to receive emails, calls, postal mail, text messages and other forms of communication regarding Health Insurance, or other offers from these companies and agents to the number(s) I’ve provided, including a mobile phone, even if I am on a state or federal Do Not Call and/or Do Not Email registry. The list of companies participating are subject to change. I will receive calls from a maximum of 5 providers. Such calls and text messages may use automated telephone dialing systems, artificial or pre-recorded voices. I understand my wireless carrier may impose charges for calls or texts. I understand that my consent to receive communications is not a condition of purchase and I may revoke my consent at any time.</p>
+        </div>
+		</div>
+    </div>
+  </div>
+ 
+<div class="footer">
+  <div class="container">
+    <p class="ftr-txt1"> <a href="#">Terms &amp; Conditions</a> <a href="#">Privacy Policy </a> <a href="#">CCPA </a> <a href="#">Contact</a> </p>
+    <p class="ftr-txt1">Copyright © 
+      <script type="text/javascript">
+                    var year = new Date();
+                    document.write(year.getFullYear());
+                </script>. Health Benefits Now All Rights Reserved </p>
+  </div>
+</div>
+</body>
+</html>
