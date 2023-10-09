@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Benefits Chatbot</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .container {
+            max-width: 400px;
+            width: 100%;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .header, .sub-header, .online-status {
+            text-align: center;
+            margin: 10px;
+        }
+
+        .header {
+            color: red;
+            font-size: 18px;
+        }
+
+        .sub-header {
+            font-size: 20px;
+        }
+
+        .online-status {
+            font-size: 16px;
+            color: green;
+            position: relative;
+        }
+
+        .online-status::before {
+            content: '';
+            position: absolute;
+            left: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 10px;
+            background-color: green;
+            border-radius: 50%;
+            animation: pulse 1s infinite;
+        }
+
+        .chat-container {
+            max-height: 500px;
+            overflow-y: auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+            margin-bottom:50px;
+        }
+
+        .chat-bubble {
+            max-width: 70%;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 15px;
+            position: relative;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .chat-bubble.active {
+            opacity: 1;
+        }
+
+        .bot-bubble {
+            align-self: flex-start;
+            background-color: #e0e0e0;
+        }
+
+        .user-bubble {
+            align-self: flex-end;
+            background-color: #0b61a4;
+            color: white;
+        }
+
+        .typing-indicator {
+            margin: 0 0 10px 15px;
+            height: 20px;
+            font-size: 10px;
+        }
+
+        .typing-indicator div {
+            border-radius: 50%;
+            height: 10px;
+            width: 10px;
+            margin: 5px;
+            background-color: #0b61a4;
+            display: inline-block;
+            opacity: 0.4;
+            animation: pulse 1.2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 20px;
+            background-color: #0b61a4;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #084c91;
+        }
+
+        .button:disabled {
+            background-color: #0b61a4;
+            opacity: 0.5;
+        }
+
+        .phone-button {
+            text-decoration: none;
+            display: inline-block;
+            padding: 15px 25px;
+            margin: 10px;
+            border-radius: 25px;
+            background-color: #28a745;
+            color: white;
+            font-size: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .phone-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            Warning: Enrollment closes on Today, <span id="date"></span> at midnight.
+        </div>
+        <div class="sub-header">
+            Unlock $6400 In Tax Credit To Pay For Your Medical Expenses And Provide You Instant Relief For Rent, Bills And Groceries
+        </div>
+        <div class="online-status">
+            <span class="green-dot"></span> Emily is Online.
+        </div>
+        <div class="chat-container" id="chat-container">
+            <div class="chat-bubble bot-bubble active">
+                <div class="chat-text">
+                    Hi 👋
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const dateElement = document.getElementById("date");
+        const today = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        dateElement.innerText = today.toLocaleDateString(undefined, options);
+
+        const chatContainer = document.querySelector(".chat-container");
+
+        function createTypingIndicator() {
+            const typingIndicator = document.createElement("div");
+            typingIndicator.className = "typing-indicator";
+            for (let i = 0; i < 3; i++) {
+                const dot = document.createElement("div");
+                typingIndicator.appendChild(dot);
+            }
+            return typingIndicator;
+        }
+
+        function addMessage(message, type) {
+            const bubble = document.createElement("div");
+            bubble.className = `chat-bubble ${type}-bubble`;
+            const text = document.createElement("div");
+            text.className = "chat-text";
+            text.innerText = message;
+            bubble.appendChild(text);
+            chatContainer.appendChild(bubble);
+            setTimeout(() => bubble.classList.add('active'), 50);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        async function simulateTyping(message, type) {
+            const typingIndicator = createTypingIndicator();
+            chatContainer.appendChild(typingIndicator);
+            await new Promise(resolve => setTimeout(resolve, message.length * 30));
+            typingIndicator.remove();
+            addMessage(message, type);
+        }
+
+        async function startConversation() {
+            await simulateTyping("I'm Emily from Health Benefits. Want to find out if you qualify for up to a $6400 subsidy as a Health Credit?", "bot");
+
+            const yesButton = document.createElement("button");
+            yesButton.className = "button";
+            yesButton.innerText = "Yes! 😃";
+            yesButton.onclick = async () => {
+                yesButton.disabled = true;
+                await simulateTyping("Okay, let me ask you two quick questions.", "bot");
+                await simulateTyping("Do you make less than $60,000/year?", "bot");
+
+                const yesButton2 = document.createElement("button");
+                yesButton2.className = "button";
+                yesButton2.innerText = "Yes";
+                yesButton2.onclick = async () => {
+                    yesButton2.disabled = true;
+                    await simulateTyping("Are you enrolled in Medicare?", "bot");
+
+                    const noButton3 = document.createElement("button");
+                    noButton3.className = "button";
+                    noButton3.innerText = "No";
+                    noButton3.onclick = async () => {
+                        noButton3.disabled = true;
+                        await simulateTyping("🎉 Congratulations! 🎁\n\nYou're pre-qualified for a $6400 subsidy as a Health Credit.", "bot");
+
+                        const phoneButton = document.createElement("a");
+                        phoneButton.className = "phone-button";
+                        phoneButton.href = "tel:+1234567890";
+                        phoneButton.innerText = "📞 Call Now to Claim!";
+                        chatContainer.appendChild(phoneButton);
+                    };
+
+                    const yesButton3 = document.createElement("button");
+                    yesButton3.className = "button";
+                    yesButton3.innerText = "Yes";
+                    yesButton3.onclick = async () => {
+                        yesButton3.style.display = "none";
+                        await simulateTyping("Unfortunately, you do not qualify for this program. If you have any other questions, feel free to ask.", "bot");
+                    };
+
+                    const buttonContainer3 = document.createElement("div");
+                    buttonContainer3.className = "button-container";
+                    buttonContainer3.appendChild(yesButton3);
+                    buttonContainer3.appendChild(noButton3);
+                    chatContainer.appendChild(buttonContainer3);
+                };
+
+                // Add a "No" button for the $60,000/year question
+                const noButton2 = document.createElement("button");
+                noButton2.className = "button";
+                noButton2.innerText = "No";
+                noButton2.onclick = async () => {
+                    noButton2.disabled = true;
+                    await simulateTyping("Unfortunately, you do not qualify for this program. If you have any other questions, feel free to ask.", "bot");
+                };
+
+                const buttonContainer2 = document.createElement("div");
+                buttonContainer2.className = "button-container";
+                buttonContainer2.appendChild(yesButton2);
+                buttonContainer2.appendChild(noButton2); // Add the "No" button to the container
+                chatContainer.appendChild(buttonContainer2);
+            };
+
+            const buttonContainer = document.createElement("div");
+            buttonContainer.className = "button-container";
+            buttonContainer.appendChild(yesButton);
+            chatContainer.appendChild(buttonContainer);
+        }
+
+        startConversation();
+    </script>
+</body>
+
+</html>
