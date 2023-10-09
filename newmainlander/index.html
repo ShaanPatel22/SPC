@@ -8,45 +8,146 @@
 <link rel="stylesheet" type="text/css" href="assets/style.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="assets/script.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://trackdrive.net/assets/trackdrive-optimizer.js"></script>
+<script>
+// NOTE: if you are not using Analytics, you would not include the ga(function(tracker) { since that is there basically
+//       to have the code PAUSE until ga is done getting the client_ID    
+    
+//        ga(function(tracker) { //remove this line of code if not using Analytics (there is another linen below too)
+      
+// Begin the Code to Get the Number from TrackDrive that will be shown on the screen 
+// NOTE2: If the Advanced Settings of the offer are trying to use os, os_version, browser, browser_version or ip as things
+//        to use for optimizer tokens, then we will automatically get those for you from user_agent and you don't have to
+//        handle.  If you see numbers getting tagged with those values and you don't want that to happen, edit the offer
+//        and go to Advanced Settings and remove them from the Optimizer Tokens to track.
+                 
+            var options = {
+                offer_token: '754a9936801e8ff256925b58a748521e', //This is the Dynamic Number Insertion Token from the offer
+//                track_ga_client_id: true, //This would be used for Google Analytics, not Adwords
+                //  If the pool was all in use, use this number (should not be a base number of extensions pool, just static number)
+                default_number: {
+                    human_number: "(877) 230-2533", //this is the SEO number from the lander
+                    plain_number: "+18772302533"
+                },
+                tokens: { //the tokens you set in your source code will override/add to the tokens TrackDrive automatically reads from the URL
+                    call_type: 'lander'
+                    }
+            };
+// End Get Number Section
+
+// Begin Replace Strings Section
+// At this point we have the number that will be used, the next section you tell us what strings to replace with
+// the different formats of the number (human, dashed, dotted, plain (used for hyperlinks normally))            
+
+            Trackdrive.Optimizer.replace_all(options, [ //You can search for any string and replace with human_number (888) 888-8888, dashed_number 888-888-888, dotted_number 888.888.8888, or plain_number +18888888888 (usually used for the <a href="tel:[plain_number]" hyperlink)
+                ['(877) 230-2533', 'human_number'], //the replace can look for any text, it doesn't have to be a number on the page, but could be like "phonenumber"
+                ['I WILL BE REPLACED', 'human_number'], //BEING A BIT REDICULOUS HERE, but so that you can see, we are looking for any string and will replace it with the phone number
+                ['+18772302533', 'plain_number'] //this is an array of strings you wish to  and replace
+            ]);
+// End Replace Strings Section
+//        }); //Remove this line of code if not using Analytics (there is another line above too)
+function hideQualificationText() {
+    var qualificationText = document.querySelector('.banr-heading');
+    var qualificationSubtext = document.querySelector('.sub-hdng');
+    
+    if (qualificationText) {
+        qualificationText.style.display = 'none';
+    }
+    
+    if (qualificationSubtext) {
+        qualificationSubtext.style.display = 'none';
+    }
+}
+function hideProgressBar() {
+    var progressBar = document.getElementById('progress-bar');
+    if (progressBar) {
+        progressBar.style.display = 'none';
+    }
+}
+function disqualifyLoanOffer() {
+    var formSlide = document.querySelector('.form-slide.active');
+    if (formSlide) {
+        formSlide.innerHTML = `
+            <h2>Looks Like You May Qualify!</h2>
+            <a href="https://273externalid.mvnocloudsolutions.com/?AccountID=20" target="_blank">
+                <img src="assets/phone.jpeg" alt="Phone Image"> 
+            <p>Click to get a free smartphone with unlimited talk, text, and data.</p>
+    <div style="margin-top: 14px;">
+        <button class="claim-button" onclick="window.location.href='https://273externalid.mvnocloudsolutions.com/?AccountID=20';">Claim Now>></button>
+    </div>
+        `;
+        hideQualificationText();
+        hideProgressBar();
+    }
+}
+
+function disqualifyMedicareOffer() {
+    var formSlide = document.querySelector('.form-slide.active');
+    if (formSlide) {
+        formSlide.innerHTML = `
+            <h2>You May Qualify!</h2>
+            <a href="https://273externalid.mvnocloudsolutions.com/?AccountID=20" target="_blank">
+                <img src="assets/phone.jpeg" alt="Phone Image"> 
+            <p>Click to get a free smartphone with unlimited talk, text, and data.</p>
+    <div style="margin-top: 14px;">
+        <button class="claim-button" onclick="window.location.href='https://273externalid.mvnocloudsolutions.com/?AccountID=20';">Claim Now>></button>
+    </div>
+        `;
+        hideQualificationText();
+        hideProgressBar();
+    }
+}
+
+function delayAndLinkOut() {
+    setTimeout(function () {
+        window.location.href = 'https://273externalid.mvnocloudsolutions.com/?AccountID=20'; // Replace with your link
+    }, 87000);
+}
+</script>
 </head>
 
 <body>
 <div class="header">
   <div class="container">
-    <div class="logo-col"> <img src="assets/logo.svg" class="logo"> </div>
+    <div class="logo-col">
+        <a href="index2.html">
+            <img src="assets/logo.svg" class="logo">
+        </a>
+    </div>
     <div class="hdr-rgt">
-      <p class="hide-mob">Need a free healthplan? <strong>Call toll free:</strong><span> <a href="tel:18773880266" style="color:#0071bc;font-weight: bold;"><img src="assets/call-ic.png"> (877) 388-0266</a> </span></p>
-      <p class="forMob"><span> <a href="tel:18773880266" style="color:#0071bc;font-weight: bold;"><img src="assets/call-ic.png"> (877) 388-0266</a> </span></p>
+      <p class="hide-mob">Want a free health plan? <strong>Call for free:</strong><span> <a href="tel:18772302533" style="color:#0087C2;font-weight: bold;"><img src="assets/call-ic.png"> (877) 230-2533</a> </span></p>
+      <p class="forMob"><span> <a href="tel:18772302533" style="color:#0087C2;font-weight: bold;"><img src="assets/call-ic.png"> (877) 230-2533</a> </span></p>
     </div>
   </div>
 </div>
 <div class="top-banner">
   <div class="container">
-    <h1 class="banr-heading"> Check Eligibility For $0 Health Insurance Plan + Premium Tax Credit! </h1>
-    <p class="sub-hdng">Tell Us A Little About You</p>
+    <h1 class="banr-heading"> Check If You Qualify For A $0 Health Insurance Plan & Premium Tax Credit! </h1>
+    <p class="sub-hdng">See If You Qualify Below</p>
   </div>
 </div>
-  <div class="quiz-sec">
+<div class="quiz-sec">
     <div class="container">
       <div class="quiz-inr-box">
         <div id="progress-bar">
             <div id="progress"></div>
         </div>
         <div class="form-slide active">
-            <h2>What is your current monthly income?</h2>
-            <button class="option-button" onclick="selectOption(this), nextSlide(2)">Less than $4,000</button>
-            <button class="option-button" onclick="selectOption(this), nextSlide(2)">More than $4,000</button>
-            <p class="call">Or Call: <span>(855) 608-0648</span></p>
+            <h2>What is your annual income?</h2>
+            <button class="option-button" onclick="selectOption(this), nextSlide(2) ">Less than $50,000</button>
+            <button class="option-button" onclick="disqualifyLoanOffer()">More than $50,000</button>
+            <p class="call">Or Call: <span><a href="tel:+18772302533">(877) 230-2533</a></span></p>
         </div>
         <div class="form-slide">
-            <h2>Are you currently on Medicaid?</h2>
-            <button class="option-button" onclick="selectOption(this), nextSlide(3)">No</button>
-            <button class="option-button" onclick="selectOption(this), nextSlide(3)">Yes</button>
-            <p class="call">Or Call: <span>(855) 608-0648</span></p>
+            <h2>Are you on Medicaid?</h2>
+            <button class="option-button" onclick="selectOption(this),nextSlide(3)">No</button>
+            <button class="option-button" onclick="disqualifyMedicareOffer()">Yes</button>
+            <p class="call">Or Call: <span><a href="tel:+18772302533">(877) 230-2533</a></span></p>
             <button class="previous-button" onclick="prevSlide(2)">&#8592; Previous</button>
         </div>
         <div class="form-slide">
-            <h2>It looks like you may qualify, congrats!</h2>
+            <h2>You May Qualify, Congrats!</h2>
             <div class="input-group">
                 <input type="text" placeholder="First Name" required>
                 <input type="text" placeholder="Last Name" required>
@@ -56,25 +157,27 @@
             <div class="gender-options">
                 <label class="gender-option">
                     <input type="radio" name="gender" value="Male">
+                    <span class="circle-select"></span> <!-- Circle select for Male -->
                     <span>Male</span>
                 </label>
                 <label class="gender-option">
                     <input type="radio" name="gender" value="Female">
+                    <span class="circle-select"></span> <!-- Circle select for Female -->
                     <span>Female</span>
                 </label>
             </div>
-            <button class="claim-button" onclick="completeForm()">Claim Your Benefits</button>
-            <p class="call">Or Call: <span>(855) 608-0648</span></p>
+            <button class="claim-button" onclick="completeForm()">Claim Now >></button>
+            <p class="call">Or Call: <span><a href="tel:+18772302533">(877) 230-2533</a></span></p>
             <button class="previous-button" onclick="prevSlide(3)">&#8592; Previous</button>
             <p class="tcpa-disclosure">By clicking the above button and submitting this form, I agree that I am 18+ years old and I provide my signature expressly consenting to receive emails, calls, postal mail, text messages and other forms of communication regarding Health Insurance, or other offers from these companies and agents to the number(s) I’ve provided, including a mobile phone, even if I am on a state or federal Do Not Call and/or Do Not Email registry. The list of companies participating are subject to change. I will receive calls from a maximum of 5 providers. Such calls and text messages may use automated telephone dialing systems, artificial or pre-recorded voices. I understand my wireless carrier may impose charges for calls or texts. I understand that my consent to receive communications is not a condition of purchase and I may revoke my consent at any time.</p>
         </div>
-		</div>
+    </div>
     </div>
   </div>
- 
+
 <div class="footer">
   <div class="container">
-    <p class="ftr-txt1"> <a href="#">Terms &amp; Conditions</a> <a href="#">Privacy Policy </a> <a href="#">CCPA </a> <a href="#">Contact</a> </p>
+    <p class="ftr-txt1"> <a href="tos.html">Terms &amp; Conditions</a> <a href="pp.html">Privacy Policy </a> <a href="ccpa.html">CCPA </a> <a href="contact.html">Contact</a> </p>
     <p class="ftr-txt1">Copyright © 
       <script type="text/javascript">
                     var year = new Date();

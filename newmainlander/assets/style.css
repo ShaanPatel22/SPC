@@ -34,6 +34,48 @@ li {list-style:none;}
 	}
 .forMob,.forTab{ display:none ;}
 
+/* Circle Select Styles */
+.gender-options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.gender-option {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.circle-select {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #0087C2; /* Border color for circle */
+    border-radius: 50%; /* Makes it a circle */
+    margin-right: 10px;
+    position: relative;
+}
+
+.circle-select::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #0087C2; /* Color when selected */
+    border-radius: 50%; /* Makes it a filled circle when selected */
+    opacity: 0; /* Initially transparent */
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.2s ease;
+}
+
+/* Style for when the radio button is checked */
+.gender-option input[type="radio"]:checked + .circle-select::before {
+    opacity: 1; /* Show the filled circle when selected */
+}
 
 @font-face {
     font-family: 'Sofia Pro';
